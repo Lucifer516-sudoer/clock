@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "clock"
+version = "0.1.0"
+description = ""
+authors = ["Lucifer516-sudoer <harishvengatachalam02092005@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
