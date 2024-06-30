@@ -23,18 +23,18 @@
 <details>
   <summary>Table of Contents</summary><br>
 
-- [ Overview](#-overview)
-- [ Features](#-features)
-- [ Repository Structure](#-repository-structure)
-- [ Modules](#-modules)
-- [ Getting Started](#-getting-started)
-  - [ Installation](#-installation)
-  - [ Usage](#-usage)
-  - [ Tests](#-tests)
-- [ Project Roadmap](#-project-roadmap)
-- [ Contributing](#-contributing)
-- [ License](#-license)
-- [ Acknowledgments](#-acknowledgments)
+- [ Overview](#overview)
+- [ Features](#features)
+- [ Repository Structure](#repository-structure)
+- [ Modules](#modules)
+- [ Getting Started](#getting-started)
+  - [ Installation](#installation)
+  - [ Usage](#usage)
+  - [ Tests](#tests)
+- [ Project Roadmap](#project-roadmap)
+- [ Contributing](#contributing)
+- [ License](#license)
+- [ Acknowledgments](#acknowledgments)
 </details>
 <hr>
 
@@ -98,19 +98,19 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 
 <details closed><summary>clock.logger</summary>
 
-| File                                                   | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-|--------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [\_custom_handler.py](clock/logger/_custom_handler.py) | Empower your log management within this clock repository by introducing customizable console and file logging with the RichLogger module. The module features RichConsoleHandler for formatted console logs and RichFileHandler to output rich-formatted entries into a specified file. This flexible logging solution enhances the readability of your app's output while maintaining compatibility with the standard Python logging module. |
-| [logger.py](clock/logger/logger.py)                    | Includes customizable loggers for clock", flet, and flet_core.Implements `RichConsoleHandler` and `RichFileHandler` to enhance output readability.Provides a way to configure loggers, ensuring flexible handlers management.                                                                                                                                                                                                                 |
+| File                                                  | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|-------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [_custom_handler.py](clock/logger/_custom_handler.py) | Empower your log management within this clock repository by introducing customizable console and file logging with the RichLogger module. The module features RichConsoleHandler for formatted console logs and RichFileHandler to output rich-formatted entries into a specified file. This flexible logging solution enhances the readability of your app's output while maintaining compatibility with the standard Python logging module. |
+| [logger.py](clock/logger/logger.py)                   | Includes customizable loggers for clock", flet, and flet_core.Implements `RichConsoleHandler` and `RichFileHandler` to enhance output readability.Provides a way to configure loggers, ensuring flexible handlers management.                                                                                                                                                                                                                 |
 
 </details>
 
 <details closed><summary>clock.app.gui</summary>
 
-| File                                     | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-|------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**main**.py](clock/app/gui/__main__.py) | The provided Python script `clock/app/gui/__main__.py` serves as the entrypoint for the graphical user interface (GUI) of our clock repository, automatically executing when `python-m clock.app.gui` is invoked. This script launches the applications main instance through `from clock.app.gui.main import run` and initiates its execution with the `run()` function call. Essentially, this file orchestrates the deployment of our apps visual components on the user's screen for easy timekeeping. |
-| [main.py](clock/app/gui/main.py)         | Updates the date-time in the specified UserControl by setting it and refreshing the screen.Sets up loggers to enable debugging for the app and flet libraries.Creates a clock user interface with theme switching and about information display features.Builds and runs the Flet application using the provided main function, which displays the date-time.                                                                                                                                              |
+| File                                       | Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+|--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`__main__`.py](clock/app/gui/__main__.py) | The provided Python script `clock/app/gui/__main__.py` serves as the entrypoint for the graphical user interface (GUI) of our clock repository, automatically executing when `python-m clock.app.gui` is invoked. This script launches the applications main instance through `from clock.app.gui.main import run` and initiates its execution with the `run()` function call. Essentially, this file orchestrates the deployment of our apps visual components on the user's screen for easy timekeeping. |
+| [main.py](clock/app/gui/main.py)           | Updates the date-time in the specified UserControl by setting it and refreshing the screen.Sets up loggers to enable debugging for the app and flet libraries.Creates a clock user interface with theme switching and about information display features.Builds and runs the Flet application using the provided main function, which displays the date-time.                                                                                                                                              |
 
 </details>
 
@@ -120,16 +120,16 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 
 **System Requirements:**
 
-- **Python**: `version x.y.z`
+- **Python**: `version 3.12.4` The version <italic>I used</italic> to develop this. 
 
 ### Installation
 
 <h4>From <code>source</code></h4>
 
 > 1. Clone the clock repository:
->
+>  
 > ```console
-> $ git clone ../clock
+> git clone https://github.com/Lucifer516-sudoer/clock.
 > ```
 >
 > 2. Change to the project directory:
@@ -139,10 +139,11 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 > ```
 >
 > 3. Install the dependencies:
->
+> - ### Using Poetry tool
 > ```console
-> $ pip install -r requirements.txt
+> poetry install
 > ```
+And yeah you need to [google](https://www.google.com) how to install poetry and stuffs.
 
 ### Usage
 
@@ -151,7 +152,7 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 > Run clock using the command below:
 >
 > ```console
-> $ python main.py
+> python -m clock.app.gui  # runs the flet program
 > ```
 
 ### Tests
@@ -159,16 +160,19 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 > Run the test suite using the command below:
 >
 > ```console
-> $ pytest
+> pytest
 > ```
-
+Nothing would happen now since, I haven't written any tests for this yet
 ---
 
 ## Project Roadmap
 
-- [x] `► INSERT-TASK-1`
-- [ ] `► INSERT-TASK-2`
-- [ ] `► ...`
+- [x] Create a skeletal boredom clock
+- [ ] Add Stop watch functionality
+- [ ] Add Timer Functionality
+- [ ] Create a world clock (I guess)
+- [ ] Modify the UI
+- [ ] Think about the packaging and stuffs (Not even thinking about it now)
 
 ---
 
@@ -176,9 +180,9 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 
 Contributions are welcome! Here are several ways you can contribute:
 
-- **[Report Issues](https://local/clock/issues)**: Submit bugs found or log feature requests for the `clock` project.
-- **[Submit Pull Requests](https://local/clock/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
-- **[Join the Discussions](https://local/clock/discussions)**: Share your insights, provide feedback, or ask questions.
+- **[Report Issues](https://github.com/Lucifer516-sudoer/clock/issues)**: Submit bugs found or log feature requests for the `clock` project.
+<!-- - **[Submit Pull Requests](https://github.com/Lucifer516-sudoer/clock/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs. -->
+- **[Join the Discussions](https://github.com/Lucifer516-sudoer/clock/discussions)**: Share your insights, provide feedback, or ask questions.
 
 <details closed>
 <summary>Contributing Guidelines</summary>
@@ -186,7 +190,7 @@ Contributions are welcome! Here are several ways you can contribute:
 1. **Fork the Repository**: Start by forking the project repository to your local account.
 2. **Clone Locally**: Clone the forked repository to your local machine using a git client.
    ```sh
-   git clone ../clock
+   git clone https://github.com/Lucifer516-sudoer/clock.git
    ```
 3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
@@ -209,7 +213,7 @@ Contributions are welcome! Here are several ways you can contribute:
 <summary>Contributor Graph</summary>
 <br>
 <p align="center">
-   <a href="https://local{/clock/}graphs/contributors">
+   <a href="https://github.com/Lucifer516-sudoer/clock/graphs/contributors">
       <img src="https://contrib.rocks/image?repo=clock">
    </a>
 </p>
@@ -219,14 +223,13 @@ Contributions are welcome! Here are several ways you can contribute:
 
 ## License
 
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
+This project is protected under the **MIT License** License. For more details, refer to the [**LICENSE**](https://choosealicense.com/licenses/mit/#) file.
 
 ---
 
 ## Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
-
-[**Return**](#-overview)
+- Have used, some stuffs from the internet, and those stuffs are creditted to the rightful owners
+[**Return**](#overview)
 
 ---
