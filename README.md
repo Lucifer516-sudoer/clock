@@ -129,7 +129,7 @@ Clock is an open-source timekeeping application written in Python, leveraging li
 > 1. Clone the clock repository:
 >  
 > ```console
-> git clone https://github.com/Lucifer516-sudoer/clock.
+> git clone https://github.com/Lucifer516-sudoer/clock.git
 > ```
 >
 > 2. Change to the project directory:
