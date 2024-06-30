@@ -1,16 +1,18 @@
-from datetime import tzinfo
 import time
+from datetime import tzinfo
 from typing import Literal
+
 import flet as ft
+
+from clock.api import DateTime
 from clock.logger import (
-    app_logger,
-    flet_logger,
-    flet_core_logger,
-    configure_present_loggers,
     RichConsoleHandler,
+    app_logger,
+    configure_present_loggers,
+    flet_core_logger,
+    flet_logger,
     logging,
 )
-from clock.api import DateTime
 
 
 class TimePiece(ft.UserControl):
@@ -96,12 +98,12 @@ class TimePiece(ft.UserControl):
         return ft.Container(
             content=ft.Column(
                 controls=self._date_time_text,
-                alignment=ft.MainAxisAlignment.CENTER,
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                expand=True,
+                # alignment=ft.MainAxisAlignment.CENTER, # Not necessary --
+                # horizontal_alignment=ft.CrossAxisAlignment.CENTER, # Not necessary --
+                # expand=True, # Not necessary --
             ),
             alignment=ft.alignment.center,
-            expand=True,
+            # expand=True,
         )
 
 
@@ -119,11 +121,11 @@ def main(page: ft.Page):
     setup_loggers()
     page.title = "Clock"
     page.fonts = {
-        "digital": "/home/lucifer/projects/py_stuffs/clock/clock/app/gui/assets/fonts/Technology.ttf",
-        "digital-bold-italic": "/home/lucifer/projects/py_stuffs/clock/clock/app/gui/assets/fonts/Technology-BoldItalic.ttf",
+        "digital": "fonts/Technology.ttf",
+        "digital-bold-italic": "fonts/Technology-BoldItalic.ttf",
     }
     page.theme = ft.Theme(
-        color_scheme_seed="#DAE300",
+        color_scheme_seed="#000be3",
     )
 
     def theme_changer(e):
@@ -170,12 +172,11 @@ def main(page: ft.Page):
         leading=ft.Icon(name=ft.icons.ALARM, size=40),
         actions=[theme_switcher, info_button],
     )
-
     dt = DateTime()
     time_piece = TimePiece(show="timedate")
     time_piece.time_text.color = ft.colors.BLUE
     time_piece.date_text.color = ft.colors.AMBER
-
+    # Wrap TimePiece in a centered container
     page.add(time_piece)
     page.update()
 
@@ -204,7 +205,7 @@ def main(page: ft.Page):
 def run(method=main):
     ft.app(
         target=main,
-        assets_dir="/home/lucifer/projects/py_stuffs/clock/clock/app/gui/assets",
+        assets_dir="assets",
     )
 
 

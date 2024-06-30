@@ -1,6 +1,8 @@
 from datetime import date, time, tzinfo
-from clock.logger import app_logger
+
 from arrow import Arrow
+
+from clock.logger import app_logger
 
 
 class DateTime:
@@ -15,7 +17,8 @@ class DateTime:
         self.logger.info(
             f"{self.class_name} Initialized the Date and Time handling API"
         )
-        self.logger.info(f"{self.class_name} Proceeding to render time and date")
+        self.logger.debug(f"{self.class_name} Time Zone: {self.tz}")
+        self.logger.info(f"{self.class_name} Proceeding to return time and date")
 
     @property
     def date_time(self) -> Arrow:
