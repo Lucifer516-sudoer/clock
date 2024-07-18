@@ -44,7 +44,8 @@ jobs:
 
       - name: Build Windows app
         run: |
-          flet pack main.py
+          cd clock\app\gui
+          flet build windows
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
