@@ -65,4 +65,5 @@ jobs:
         with:
           name: windows-app
           # path: dist/
-          path: build/
+          # path: build/
+          path: clock/app/gui/build/windows/
