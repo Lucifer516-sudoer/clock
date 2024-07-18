@@ -57,6 +57,8 @@ jobs:
         run: |
           cd clock\app\gui
           flet build windows
+          pwd
+          ls
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
