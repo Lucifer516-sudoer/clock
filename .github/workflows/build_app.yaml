@@ -33,13 +33,13 @@ jobs:
 
       - name: Set up Android SDK
         run: |
+          $env:ANDROID_SDK_ROOT="C:\Android\android-sdk"
+          mkdir -Force $env:ANDROID_SDK_ROOT\cmdline-tools\latest
           Invoke-WebRequest -Uri https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip -OutFile commandlinetools-win.zip
-          Expand-Archive commandlinetools-win.zip -DestinationPath $env:ANDROID_SDK_ROOT/cmdline-tools
-          New-Item -ItemType Directory -Force -Path $env:ANDROID_SDK_ROOT/cmdline-tools/latest
-          Move-Item -Path $env:ANDROID_SDK_ROOT/cmdline-tools/cmdline-tools/* -Destination $env:ANDROID_SDK_ROOT/cmdline-tools/latest
-          & "$env:ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager.bat" --licenses
-          & "$env:ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager.bat" --update
-          & "$env:ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager.bat" "platform-tools" "platforms;android-30" "build-tools;30.0.3"
+          Expand-Archive commandlinetools-win.zip -DestinationPath $env:ANDROID_SDK_ROOT\cmdline-tools\latest
+          & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --licenses
+          & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --update
+          & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
       - name: Build Windows app
         run: |
@@ -66,21 +66,21 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y openjdk-11-jdk unzip
+          sudo apt-get install -y openjdk-11-jdk unzip wget
           pip install flet
 
       - name: Install Flutter SDK
         run: |
           git clone https://github.com/flutter/flutter.git -b stable --depth 1
           echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
+          flutter precache
 
       - name: Set up Android SDK
         run: |
-          mkdir -p $HOME/Android/Sdk/cmdline-tools
-          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-          unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android/Sdk/cmdline-tools
           mkdir -p $HOME/Android/Sdk/cmdline-tools/latest
-          mv $HOME/Android/Sdk/cmdline-tools/cmdline-tools/* $HOME/Android/Sdk/cmdline-tools/latest/
+          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
+          unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android/Sdk/cmdline-tools/latest
           echo "sdk.dir=$HOME/Android/Sdk" > local.properties
           echo "flutter.sdk=$GITHUB_WORKSPACE/flutter" >> local.properties
           yes | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
@@ -89,7 +89,8 @@ jobs:
 
       - name: Build Android APK
         run: |
-          cd clock/app/gui/
+          cd clock/app/gui
+          flutter doctor
           flet build apk
 
       - name: Upload artifact
