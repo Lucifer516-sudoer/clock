@@ -27,8 +27,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Flutter SDK
+        # Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.0.5-stable.zip -OutFile flutter_windows.zip
         run: |
-          Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.0.5-stable.zip -OutFile flutter_windows.zip
+          Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.22.3-stable.zip
           Expand-Archive flutter_windows.zip -DestinationPath $env:GITHUB_WORKSPACE
           echo "$env:GITHUB_WORKSPACE/flutter/bin" | Out-File -Append -FilePath $env:GITHUB_PATH
 
