@@ -26,13 +26,21 @@ jobs:
           pip install "pyinstaller==6.8.0"
           pip install -r requirements.txt
 
-      - name: Install Flutter SDK
-        run: |
-          Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.22.3-stable.zip -OutFile flutter_windows.zip
-          Expand-Archive flutter_windows.zip -DestinationPath $env:GITHUB_WORKSPACE
-          $env:Path += ";$env:GITHUB_WORKSPACE/flutter/flutter/bin"
-          flutter doctor
-
+      # - name: Install Flutter SDK
+      #   run: |
+      #     Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.22.3-stable.zip -OutFile flutter_windows.zip
+      #     Expand-Archive flutter_windows.zip -DestinationPath $env:GITHUB_WORKSPACE
+      #     $env:Path += ";$env:GITHUB_WORKSPACE/flutter/flutter/bin"
+      #     flutter doctor
+      # steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.19.0
+      - run: flutter --version
       - name: Set up Android SDK
         run: |
           $env:ANDROID_SDK_ROOT="C:\Android\android-sdk"
