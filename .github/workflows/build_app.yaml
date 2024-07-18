@@ -23,7 +23,8 @@ jobs:
 
       - name: Install Flet
         run: |
-          pip install flet
+          pip install "pyinstaller==6.8.0"
+          pip install -r requirements.txt
 
       - name: Install Flutter SDK
         run: |
