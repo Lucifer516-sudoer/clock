@@ -89,6 +89,7 @@ jobs:
 
       - name: Build Android APK
         run: |
+          cd clock/app/gui/
           flet build apk
 
       - name: Upload artifact
