@@ -27,21 +27,20 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Flutter SDK
-        # Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.0.5-stable.zip -OutFile flutter_windows.zip
-        # git clone -b master https://github.com/flutter/flutter.git
-        # .\flutter\bin\flutter --version
         run: |
           Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.22.3-stable.zip -OutFile flutter_windows.zip
           Expand-Archive flutter_windows.zip -DestinationPath $env:GITHUB_WORKSPACE
-          echo "$env:GITHUB_WORKSPACE/flutter/bin" | Out-File -Append -FilePath $env:GITHUB_PATH
-          pwd; flutter doctor
+          echo "$env:GITHUB_WORKSPACE/flutter/flutter/bin" >> $GITHUB_PATH
+          $env:PATH += ";$env:GITHUB_WORKSPACE/flutter/flutter/bin"
+          flutter doctor
 
       - name: Set up Android SDK
         run: |
           $env:ANDROID_SDK_ROOT="C:\Android\android-sdk"
           mkdir -Force $env:ANDROID_SDK_ROOT\cmdline-tools\latest
           Invoke-WebRequest -Uri https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip -OutFile commandlinetools-win.zip
-          Expand-Archive commandlinetools-win.zip -DestinationPath $env:ANDROID_SDK_ROOT\cmdline-tools\latest
+          Expand-Archive commandlinetools-win.zip -DestinationPath $env:ANDROID_SDK_ROOT\cmdline-tools
+          Move-Item -Path "$env:ANDROID_SDK_ROOT\cmdline-tools\cmdline-tools" -Destination "$env:ANDROID_SDK_ROOT\cmdline-tools\latest"
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --licenses
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --update
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" "platform-tools" "platforms;android-30" "build-tools;30.0.3"
@@ -55,52 +54,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: windows-app
-          path: dist/
-
-  build-android:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y openjdk-11-jdk unzip wget
-          pip install flet
-
-      - name: Install Flutter SDK
-        run: |
-          git clone https://github.com/flutter/flutter.git -b stable --depth 1
-          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          export PATH="$GITHUB_WORKSPACE/flutter/bin:$PATH"
-          flutter precache
-
-      - name: Set up Android SDK
-        run: |
-          mkdir -p $HOME/Android/Sdk/cmdline-tools/latest
-          wget https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-          unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android/Sdk/cmdline-tools/latest
-          echo "sdk.dir=$HOME/Android/Sdk" > local.properties
-          echo "flutter.sdk=$GITHUB_WORKSPACE/flutter" >> local.properties
-          echo "yes" | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
-          $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --update
-          $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-
-      - name: Build Android APK
-        run: |
-          cd clock/app/gui
-          flutter doctor
-          flet build apk
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: android-apk
           path: dist/
