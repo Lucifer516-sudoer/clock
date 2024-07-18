@@ -30,8 +30,7 @@ jobs:
         run: |
           Invoke-WebRequest -Uri https://storage.googleapis.com/flutter_infra_release/releases/stable/windows/flutter_windows_3.22.3-stable.zip -OutFile flutter_windows.zip
           Expand-Archive flutter_windows.zip -DestinationPath $env:GITHUB_WORKSPACE
-          echo "$env:GITHUB_WORKSPACE/flutter/flutter/bin" >> $GITHUB_PATH
-          $env:PATH += ";$env:GITHUB_WORKSPACE/flutter/flutter/bin"
+          $env:Path += ";$env:GITHUB_WORKSPACE/flutter/flutter/bin"
           flutter doctor
 
       - name: Set up Android SDK
@@ -41,6 +40,7 @@ jobs:
           Invoke-WebRequest -Uri https://dl.google.com/android/repository/commandlinetools-win-7583922_latest.zip -OutFile commandlinetools-win.zip
           Expand-Archive commandlinetools-win.zip -DestinationPath $env:ANDROID_SDK_ROOT\cmdline-tools
           Move-Item -Path "$env:ANDROID_SDK_ROOT\cmdline-tools\cmdline-tools" -Destination "$env:ANDROID_SDK_ROOT\cmdline-tools\latest"
+          $env:Path += ";$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin"
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --licenses
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" --update
           & "$env:ANDROID_SDK_ROOT\cmdline-tools\latest\bin\sdkmanager.bat" "platform-tools" "platforms;android-30" "build-tools;30.0.3"
