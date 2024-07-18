@@ -34,6 +34,7 @@ jobs:
           git clone -b master https://github.com/flutter/flutter.git
           .\flutter\bin\flutter --version
           echo "$env:GITHUB_WORKSPACE/flutter/bin" | Out-File -Append -FilePath $env:GITHUB_PATH
+          pwd; flutter doctor
 
       - name: Set up Android SDK
         run: |
