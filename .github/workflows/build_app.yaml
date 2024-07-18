@@ -83,7 +83,7 @@ jobs:
           unzip commandlinetools-linux-7583922_latest.zip -d $HOME/Android/Sdk/cmdline-tools/latest
           echo "sdk.dir=$HOME/Android/Sdk" > local.properties
           echo "flutter.sdk=$GITHUB_WORKSPACE/flutter" >> local.properties
-          yes | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
+          echo "yes" | $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --licenses
           $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager --update
           $HOME/Android/Sdk/cmdline-tools/latest/bin/sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3"
 
