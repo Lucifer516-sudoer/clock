@@ -3,7 +3,7 @@ And Mainly an base logger that can be used to derive child loggers"""
 
 import logging
 
-from clock.logger._custom_handler import (  # noqa: F401
+from clock.backend.logger._custom_handler import (  # noqa: F401
     RichConsoleHandler,  # type: ignore
     RichFileHandler,  # type: ignore
 )

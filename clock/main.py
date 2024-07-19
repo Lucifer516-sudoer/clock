@@ -4,8 +4,8 @@ from typing import Literal
 
 import flet as ft
 
-from clock.api import DateTime
-from clock.logger import (
+from clock.backend.api import DateTime
+from clock.backend.logger import (
     RichConsoleHandler,
     app_logger,
     configure_present_loggers,
@@ -202,12 +202,7 @@ def main(page: ft.Page):
         app_logger.info("[main@flet] Clock app terminated")
 
 
-def run(method=main):
-    ft.app(
-        target=main,
-        assets_dir="assets",
-    )
-
-
-if __name__ == "__main__":
-    run()
+ft.app(
+    target=main,
+    assets_dir="assets",
+)

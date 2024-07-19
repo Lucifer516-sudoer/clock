@@ -4,7 +4,7 @@ And Mainly an base logger that can be used to derive child loggers"""
 import logging
 from typing import TypeAlias
 
-from clock.logger.logger import (
+from clock.backend.logger.logger import (
     RichConsoleHandler,
     RichFileHandler,
     app_logger,
