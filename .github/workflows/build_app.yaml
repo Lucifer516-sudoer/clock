@@ -55,7 +55,7 @@ jobs:
 
       - name: Build Windows app
         run: |
-          flet build windows clock
+          flet build --build-version='1.0.0' windows clock\
           ls
 
       - name: Upload artifact
