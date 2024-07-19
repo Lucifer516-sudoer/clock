@@ -55,9 +55,7 @@ jobs:
 
       - name: Build Windows app
         run: |
-          cd clock\app\gui
           flet build windows
-          pwd
           ls
 
       - name: Upload artifact
@@ -66,4 +64,4 @@ jobs:
           name: windows-app
           # path: dist/
           # path: build/
-          path: clock/app/gui/build/windows/
+          path: build/windows/
